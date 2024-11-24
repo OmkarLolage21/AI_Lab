@@ -2,13 +2,13 @@ package org.example;
 
 import java.util.*;
 
-class GreedyBestFirstSearch {
+class GreedyBestFirstSearchNumbers {
     static class Node implements Comparable<Node> {
-        String name;
+        int id;
         int heuristic;
 
-        Node(String name, int heuristic) {
-            this.name = name;
+        Node(int id, int heuristic) {
+            this.id = id;
             this.heuristic = heuristic;
         }
 
@@ -17,29 +17,31 @@ class GreedyBestFirstSearch {
             return Integer.compare(this.heuristic, other.heuristic);
         }
     }
-    static Map<String, List<String>> graph = new HashMap<>();
-    static Map<String, Integer> heuristics = new HashMap<>();
-    public static void greedyBestFirstSearch(String start, String goal) {
+
+    static Map<Integer, List<Integer>> graph = new HashMap<>();
+    static Map<Integer, Integer> heuristics = new HashMap<>();
+
+    public static void greedyBestFirstSearch(int start, int goal) {
         PriorityQueue<Node> openList = new PriorityQueue<>();
-        Set<String> visited = new HashSet<>();
+        Set<Integer> visited = new HashSet<>();
         openList.add(new Node(start, heuristics.get(start)));
 
         System.out.println("Exploring path: ");
         while (!openList.isEmpty()) {
             Node current = openList.poll();
-            if (visited.contains(current.name)) {
+            if (visited.contains(current.id)) {
                 continue;
             }
 
-            System.out.println(current.name);
-            visited.add(current.name);
+            System.out.println(current.id);
+            visited.add(current.id);
 
-            if (current.name.equals(goal)) {
+            if (current.id == goal) {
                 System.out.println("Goal reached: " + goal);
                 return;
             }
 
-            for (String neighbor : graph.getOrDefault(current.name, new ArrayList<>())) {
+            for (int neighbor : graph.getOrDefault(current.id, new ArrayList<>())) {
                 if (!visited.contains(neighbor)) {
                     openList.add(new Node(neighbor, heuristics.get(neighbor)));
                 }
@@ -54,31 +56,29 @@ class GreedyBestFirstSearch {
         System.out.print("Enter the number of nodes: ");
         int nodes = scanner.nextInt();
 
-        System.out.println("Enter the edges (format: from to), type 'done' to stop:");
-        scanner.nextLine();
-        while (true) {
-            String edge = scanner.nextLine();
-            if (edge.equalsIgnoreCase("done")) break;
-            String[] parts = edge.split(" ");
-            String from = parts[0];
-            String to = parts[1];
+        System.out.print("Enter the number of edges: ");
+        int edges = scanner.nextInt();
+
+        System.out.println("Enter the edges (format: from to):");
+        for (int i = 0; i < edges; i++) {
+            int from = scanner.nextInt();
+            int to = scanner.nextInt();
 
             graph.putIfAbsent(from, new ArrayList<>());
             graph.get(from).add(to);
         }
 
-        // Input heuristic values
         System.out.println("Enter heuristic values for each node (format: node value):");
         for (int i = 0; i < nodes; i++) {
-            String[] parts = scanner.nextLine().split(" ");
-            heuristics.put(parts[0], Integer.parseInt(parts[1]));
+            int node = scanner.nextInt();
+            int heuristic = scanner.nextInt();
+            heuristics.put(node, heuristic);
         }
 
-        // Input start and goal nodes
         System.out.print("Enter the start node: ");
-        String start = scanner.nextLine();
+        int start = scanner.nextInt();
         System.out.print("Enter the goal node: ");
-        String goal = scanner.nextLine();
+        int goal = scanner.nextInt();
 
         // Perform the search
         greedyBestFirstSearch(start, goal);
@@ -86,4 +86,3 @@ class GreedyBestFirstSearch {
         scanner.close();
     }
 }
-
