@@ -88,7 +88,6 @@ public class Main {
                 }
             }
         }
-
         board[move] = ai;
         System.out.println("AI chose position " + (move + 1));
         printBoard();
@@ -117,7 +116,6 @@ public class Main {
                 bestScore = isMaximizing ? Math.max(score, bestScore) : Math.min(score, bestScore);
             }
         }
-
         return bestScore;
     }
 }
