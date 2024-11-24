@@ -57,30 +57,30 @@ public class GraphTraversal {
         }
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter the number of vertices: ");
-        int vertices = scanner.nextInt();
+            System.out.print("Enter the number of vertices: ");
+            int vertices = scanner.nextInt();
 
-        GraphTraversal graph = new GraphTraversal(vertices);
+            GraphTraversal graph = new GraphTraversal(vertices);
 
-        System.out.print("Enter the number of edges: ");
-        int edges = scanner.nextInt();
+            System.out.print("Enter the number of edges: ");
+            int edges = scanner.nextInt();
 
-        System.out.println("Enter the edges (source destination):");
-        for (int i = 0; i < edges; i++) {
-            int source = scanner.nextInt();
-            int destination = scanner.nextInt();
-            graph.addEdge(source, destination);
+            System.out.println("Enter the edges (source destination):");
+            for (int i = 0; i < edges; i++) {
+                int source = scanner.nextInt();
+                int destination = scanner.nextInt();
+                graph.addEdge(source, destination);
+            }
+
+            System.out.print("Enter the starting vertex for BFS and DFS: ");
+            int startVertex = scanner.nextInt();
+
+            graph.bfs(startVertex);
+            graph.dfs(startVertex);
         }
-
-        System.out.print("Enter the starting vertex for BFS and DFS: ");
-        int startVertex = scanner.nextInt();
-
-        graph.bfs(startVertex);
-        graph.dfs(startVertex);
-    }
 }
 //6 6
 
