@@ -1,3 +1,4 @@
+//Greedy
 package org.example;
 
 import java.util.*;

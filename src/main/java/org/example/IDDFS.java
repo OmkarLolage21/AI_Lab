@@ -1,3 +1,5 @@
+//IDDFS
+
 package org.example;
 
 import java.util.*;
@@ -74,7 +76,6 @@ public class IDDFS {
         } else {
             System.out.println("No path exists between " + src + " and " + dest);
         }
-        scanner.close();
     }
 }
 
